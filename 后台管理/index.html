@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <meta name="Generator" content="Sublime Text3">
+    <meta name="Author" content="中山卉子">
+    <meta name="Description" content="初!">
+    <meta name="viewort" content="width=device-width,initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="css/custom.css">
+    <link rel="stylesheet" type="text/css" href="css/houtai.css">
+    
+</head>
+<body>
+    <div class="container-faluid" id="app">
+       <!-- 导航栏 -->
+       <div class="row navG">
+           <div class="col-md-2 col-sm-2 col-xs-2 navTit">
+               <div class="Ridu">Ri<span>du</span></div>
+           </div>
+           <div class="col-md-10 col-sm-10 col-xs-10 navCont"></div>
+       </div>
+       <div class="row cont">
+         <div class="col-md-2 col-sm-2 col-xs-2 contLeft">
+           <div class="user">
+             <img src="img/timg.jpg" class="img-responsive">
+             <span class="damin">damin1</span>
+             <div class="online"><span></span>在线</div>
+             <select>
+               <option>祥子</option>
+             </select>
+           </div>
+           <div class="list-group">
+              <a class="list-group-item" v-link="{ path: '/manage'}">管理员管理<span class="span01">hot</span></a>
+              <a class="list-group-item" v-link="{ path: '/use'}">用户管理</a>
+              <a class="list-group-item" v-link="{ path: '/wenzhang'}">文章管理<span class="span02">18</span></a>
+              <a class="list-group-item" v-link="{ path: '/music'}">音频管理</a>
+          </div>
+         </div>
+         <div class="col-md-10 col-sm-10 col-xs-10 contRight">
+           <div class="panel">
+            <div class="panel-heading">
+              <h3 class="panel-title">管理员</h3>
+              <p>管理一些信息</p>
+            </div>
+            <div class="panel-body">
+              <router-view></router-view>
+            </div>
+          </div>
+         </div>
+       </div>
+    </div>
+
+    <template id="manage">
+      <div class="blue">
+        <h1>管理员管理</h1>
+        <p>{{msg}}</p>
+      </div>
+    </template>
+    <template id="use">
+      <div class="blue">
+        <h1>用户管理</h1>
+        <p>This is the tutorial about vue-router.</p>
+      </div>
+    </template>
+     <template id="wenzhang">
+      <div class="blue">
+        <h1>文章管理</h1>
+        <p>This is the tutorial about vue-router.</p>
+      </div>
+    </template>
+     <template id="music">
+      <div class="blue">
+        <h1>音频管理</h1>
+        <p>This is the tutorial about vue-router.</p>
+      </div>
+    </template>
+</body>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script src="js/vue.js"></script>
+    <script src="js/vue-router.js"></script>
+    <script type="text/javascript">
+           /* 长宽占位 rem算法, 根据root的rem来计算各元素相对rem, 默认html 320/20 = 16px */
+         function placeholderPic(){
+          var w = document.documentElement.offsetWidth;
+          document.documentElement.style.fontSize=w/50+'px';
+         }
+         placeholderPic();
+         window.onresize=function(){
+          placeholderPic();
+         }
+
+
+         var Manage = Vue.extend({
+          template: '#manage',
+          data: function() {
+            return {
+              msg: '管理员'
+            }
+          }
+        })
+
+        var User = Vue.extend({
+          template: '#use'
+        })
+        var Wenzhang = Vue.extend({
+          template: '#wenzhang'
+        })
+        var Music = Vue.extend({
+          template: '#music'
+        })
+        var router = new VueRouter();
+        router.map({
+          '/manage': {
+            component: Manage
+          },
+          '/use': {
+            component: User
+          },
+          '/wenzhang':{
+            component: Wenzhang
+          },
+          '/music':{
+            component: Music
+          }
+        })
+        router.redirect({
+          '/': '/manage'
+        })
+
+        var App = Vue.extend({})
+        router.start(App, '#app')
+    </script>
+</html>
